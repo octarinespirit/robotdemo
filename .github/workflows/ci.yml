@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Hae repo GitHubista
+      # 1. Fetch repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Buildaa Docker image
+      # 2. Build Docker image
       - name: Build Docker image
         run: docker build -t demo-tests .
 
-      # 3. Aja testit
+      # 3. Run the tests
       - name: Run tests
         run: |
           docker run --rm \
@@ -26,7 +26,7 @@ jobs:
             -e BASEURL=https://mybank-8s6n.onrender.com \
             demo-tests
 
-      # 4. Tallenna tulokset (optional mutta suositeltu)
+      # 4. Upload results
       - name: Upload results
         uses: actions/upload-artifact@v4
         if: always()
